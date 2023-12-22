@@ -1,7 +1,7 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import { fetchAllProducts } from "./api";
+import { fetchAllProducts } from "./api/products";
 
 function App() {
   useEffect(() => {
