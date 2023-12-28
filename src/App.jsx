@@ -1,4 +1,5 @@
 import "./App.css";
+import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
 
@@ -18,7 +19,6 @@ function App() {
         <Route path="/" element="Main Page" />
         <Route path="/:productId" element="Specific Product" />
       </Routes>
-
       <h1>Main Page</h1>
     </>
   );
