@@ -2,6 +2,8 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
 import { useEffect, useState } from "react";
+import Login from "./components/Login.jsx";
+import Register from "./componets/Register.jsx";
 
 function App() {
   const [token, setToken] = useState(null);
@@ -17,6 +19,8 @@ function App() {
     <>
       <Routes>
         <Route path="/" element="Main Page" />
+        <Route path="/login" element={<Login setToken={setToken} />} />
+        <Route path="/register" element={<Register />} />
         <Route path="/:productId" element="Specific Product" />
       </Routes>
       <h1>Main Page</h1>
