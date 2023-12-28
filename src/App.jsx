@@ -7,12 +7,12 @@ function App() {
   const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
 
-  useEffect(()=>{
+  useEffect(() => {
     const localToken = localStorage.getItem("token");
     setToken(localToken);
-  }
+  });
 
-  useEffect(()=>{async function getUser})
+  // useEffect(()=>{async function getUser})
   return (
     <>
       <Routes>
