@@ -1,16 +1,18 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import { fetchAllProducts } from "./api/products";
+import { useEffect, useState } from "react";
 
 function App() {
-  useEffect(() => {
-    async function loadProduct() {
-      await fetchAllProducts();
-    }
-    loadProduct();
-  }, []);
+  const [token, setToken] = useState(null);
+  const [user, setUser] = useState(null);
 
+  useEffect(() => {
+    const localToken = localStorage.getItem("token");
+    setToken(localToken);
+  });
+
+  // useEffect(()=>{async function getUser})
   return (
     <>
       <Routes>
