@@ -10,6 +10,8 @@ function App() {
     const localToken = localStorage.getItem("token");
     setToken(localToken);
   }
+
+  useEffect(()=>{async function getUser})
   return (
     <>
       <Routes>
