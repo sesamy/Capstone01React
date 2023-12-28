@@ -1,9 +1,8 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import { useEffect, useState } from "react";
 import Login from "./components/Login.jsx";
-import Register from "./componets/Register.jsx";
+import Register from "./components/Register.jsx";
 
 function App() {
   const [token, setToken] = useState(null);
