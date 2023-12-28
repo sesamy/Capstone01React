@@ -26,7 +26,17 @@ export default function Login({ setToken }) {
             onChange={(event) => setEmail(event.target.value)}
           />
         </label>
+        <label>
+          Password:
+          <input
+            type="password"
+            value={password}
+            onChange={(event) => setPassword(event.target.value)}
+          />
+        </label>
+        <button>Login</button>
       </form>
+      <Link to="/register">Don't have an account? Click here to signup.</Link>
     </>
   );
 }
