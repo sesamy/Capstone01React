@@ -1,4 +1,4 @@
-import Constants from "../utils/Constants.js";
+import Constants from "../utils/constants.js";
 
 export const userLogin = async (props) => {
   try {
