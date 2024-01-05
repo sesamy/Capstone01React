@@ -23,7 +23,6 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/:productId" element="Specific Product" />
       </Routes>
-      <h1>Main Page</h1>
     </>
   );
 }
