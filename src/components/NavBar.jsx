@@ -5,7 +5,15 @@ export default function NavBar({ token, setUser, setToken }) {
     <>
       <Link to="./">Home</Link>
 
-      <div>{token ? <p>Hello, User!</p> : <p>Not logged in!</p>} </div>
+      <div>
+        {token ? (
+          <div className="navbar-login">Hello, User!</div>
+        ) : (
+          <div className="navbar-login">
+            <Link to="/login">Login</Link>
+          </div>
+        )}
+      </div>
       {token && (
         <Link
           to="/login"
