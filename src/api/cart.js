@@ -57,6 +57,17 @@ export const fetchCartsByDate = async (props) => {
   }
 };
 
+//get cart by userID
+export const fetchCartByUser = async ({ userId }) => {
+  try {
+    const rsp = await fetch(`${Constants.API_URL}/carts/user/${userId}`);
+    const result = await rsp.json();
+    return result;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
 //create a new cart by adding a product
 export const addProductToCart = async (props) => {
   try {

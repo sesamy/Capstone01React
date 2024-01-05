@@ -7,7 +7,7 @@ export default function HomePage(props) {
       <NavBar />
       {/* <SearchBar /> */}
       <AllProducts />
-      {/* <Cart /> */}
+      <Cart userId={props.userId} />
     </>
   );
 }
