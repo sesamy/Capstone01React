@@ -14,7 +14,7 @@ export const fetchAllCarts = async () => {
 //fetch a single cart by ID
 export const fetchSingleCart = async (props) => {
   try {
-    const rsp = await fetch(`${Constants.API_URL}/carts/${props.cartId}`);
+    const rsp = await fetch(`${Constants.API_URL}/carts/${props}`);
     const result = await rsp.json();
     return result;
   } catch (err) {
@@ -50,6 +50,17 @@ export const fetchCartsByDate = async (props) => {
     const rsp = await fetch(
       `${Constants.API_URL}/carts?startdate=${props.startDate}&enddate=${props.endDate}`
     );
+    const result = await rsp.json();
+    return result;
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+//get cart by userID
+export const fetchCartByUser = async ({ userId }) => {
+  try {
+    const rsp = await fetch(`${Constants.API_URL}/carts/user/${userId}`);
     const result = await rsp.json();
     return result;
   } catch (err) {
