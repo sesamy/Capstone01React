@@ -13,7 +13,7 @@ export const fetchAllProducts = async () => {
 
 export const fetchSingleProduct = async (props) => {
   try {
-    const rsp = await fetch(`${Constants.API_URL}/products/${props.id}`);
+    const rsp = await fetch(`${Constants.API_URL}/products/${props}`);
     const result = await rsp.json();
     return result;
   } catch (err) {

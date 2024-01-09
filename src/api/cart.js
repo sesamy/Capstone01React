@@ -14,7 +14,7 @@ export const fetchAllCarts = async () => {
 //fetch a single cart by ID
 export const fetchSingleCart = async (props) => {
   try {
-    const rsp = await fetch(`${Constants.API_URL}/carts/${props.cartId}`);
+    const rsp = await fetch(`${Constants.API_URL}/carts/${props}`);
     const result = await rsp.json();
     return result;
   } catch (err) {
