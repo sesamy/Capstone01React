@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { fetchAllProducts } from "../api/products.js";
 
+import "./AllProducts.css";
+
 import ProductCard from "./ProductCard.jsx";
 // import ".AllProducts.css";
 
