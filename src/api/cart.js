@@ -95,7 +95,8 @@ export const addProductToCart = async (props) => {
 export const updateProductInCart = async (props) => {
   try {
     const rsp = await fetch(`${Constants.API_URL}/carts/${props.cartId}`, {
-      method: "PUT",
+      method: "PATCH",
+      headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
         userId: 3,
         date: `${props.date}`,
