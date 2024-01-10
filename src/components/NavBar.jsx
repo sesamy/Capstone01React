@@ -26,6 +26,8 @@ export default function NavBar({ token, setUser, setToken }) {
           Logout
         </Link>
       )}
+
+      <Link to="./account">Account</Link>
     </>
   );
 }

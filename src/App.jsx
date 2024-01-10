@@ -1,28 +1,30 @@
 import "./App.css";
 import { useEffect, useState } from "react";
 import { Routes, Route } from "react-router-dom";
-import Login from "./components/Login.jsx";
-import Register from "./components/Register.jsx";
-import HomePage from "./components/HomePage.jsx";
+import Login from "./components/Login";
+import Register from "./components/Register";
+import HomePage from "./components/HomePage";
+import Account from "./components/Account";
+import AuthContextProvider from "./contexts/AuthContextProvider";
+import RequireAuth from "./components/RequireAuth/RequireAuth";
 
 function App() {
-  const [token, setToken] = useState(null);
   const [user, setUser] = useState(null);
-
-  useEffect(() => {
-    const localToken = localStorage.getItem("token");
-    setToken(localToken);
-  });
 
   // useEffect(()=>{async function getUser})
   return (
     <>
-      <Routes>
-        <Route path="/" element={<HomePage token={token} />} />
-        <Route path="/login" element={<Login setToken={setToken} />} />
-        <Route path="/register" element={<Register />} />
-        <Route path="/:productId" element="Specific Product" />
-      </Routes>
+      <AuthContextProvider>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="/:productId" element="Specific Product" />
+          <Route element={<RequireAuth />}>
+            <Route path="/account" element={<Account />} />
+          </Route>
+        </Routes>
+      </AuthContextProvider>
     </>
   );
 }
