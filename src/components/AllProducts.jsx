@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { fetchAllProducts } from "../api/products.js";
+import { priceFormatter } from "../utils/helpers.js";
 
 import "./AllProducts.css";
 
@@ -28,7 +29,7 @@ export default function AllProducts() {
           <div key={product.id}>
             <ProductCard
               title={product.title}
-              price={product.price}
+              price={priceFormatter(product.price)}
               description={product.description}
               image={product.image}
             />
