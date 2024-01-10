@@ -13,9 +13,14 @@ export default function Login() {
   async function handleSubmit(event) {
     event.preventDefault();
     const userObj = { username, password };
-    const data = await userLogin(userObj);
-    setToken(data.token);
-    navigate("/account");
+    try {
+      const data = await userLogin(userObj);
+      setToken(data.token);
+      localStorage.setItem("token", data.token);
+      navigate("/account");
+    } catch (err) {
+      console.error(err);
+    }
   }
 
   return (
