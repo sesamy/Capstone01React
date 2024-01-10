@@ -1,7 +1,8 @@
 import { fetchCartByUser, fetchSingleCart } from "../api/cart.js";
 import { useEffect, useState } from "react";
 import { fetchSingleProduct } from "../api/products.js";
-import useAuth from "../hooks/useAuth.jsx";
+import useAuth from "../hooks/useAuth";
+import { priceFormatter } from "../utils/helpers.js";
 
 export default function Cart({ userId, storedCartId }) {
   const [cart, setCart] = useState([]);
@@ -75,7 +76,7 @@ export default function Cart({ userId, storedCartId }) {
         })}
       </div>
       <div>
-        <p>{cartTotal}</p>
+        <p>{priceFormatter(cartTotal)}</p>
       </div>
     </>
   );
