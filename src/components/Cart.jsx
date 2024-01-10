@@ -63,8 +63,6 @@ export default function Cart({ userId, storedCartId }) {
   return (
     <>
       <div className="cart">
-        <div>{token}</div>
-
         {cart.map((item, i) => {
           return (
             <div key={i} className="single-item-cart">
