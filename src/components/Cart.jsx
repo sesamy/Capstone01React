@@ -1,10 +1,12 @@
 import { fetchCartByUser, fetchSingleCart } from "../api/cart.js";
 import { useEffect, useState } from "react";
 import { fetchSingleProduct } from "../api/products.js";
+import useAuth from "../hooks/useAuth.jsx";
 
-export default function Cart({ userId, token, storedCartId }) {
+export default function Cart({ userId, storedCartId }) {
   const [cart, setCart] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
+  const { token } = useAuth();
 
   useEffect(() => {
     async function getData() {
@@ -17,6 +19,23 @@ export default function Cart({ userId, token, storedCartId }) {
     }
     getData();
   }, []);
+
+  useEffect(() => {
+    async function addCartPrice(item) {
+      try {
+        const data = await fetchSingleProduct(item.productId);
+        return data;
+      } catch (err) {
+        console.error(err);
+      }
+    }
+    Promise.all(cart.map(addCartPrice))
+      .then((res) => {
+        const total = res.reduce((total, item) => total + item.price, 0);
+        setCartTotal(total);
+      })
+      .catch((err) => console.error(err));
+  }, [cart]);
 
   // if (userId && token) {
   //   useEffect(() => {
@@ -44,6 +63,7 @@ export default function Cart({ userId, token, storedCartId }) {
   return (
     <>
       <div className="cart">
+        <div>{token}</div>
         {/* Currently accumulating total endlessly */}
         {cart.map((item, i) => {
           // async function addCartPrice() {
@@ -69,7 +89,7 @@ export default function Cart({ userId, token, storedCartId }) {
         })}
       </div>
       <div>
-        <p>cartTotal</p>
+        <p>{cartTotal}</p>
       </div>
     </>
   );
