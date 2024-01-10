@@ -64,20 +64,8 @@ export default function Cart({ userId, storedCartId }) {
     <>
       <div className="cart">
         <div>{token}</div>
-        {/* Currently accumulating total endlessly */}
-        {cart.map((item, i) => {
-          // async function addCartPrice() {
-          //   try {
-          //     const data = await fetchSingleProduct(item.productId);
-          //     const itemPrice = data.price;
-          //     const amount = cartTotal + itemPrice * item.quantity;
-          //     setCartTotal(amount);
-          //   } catch (err) {
-          //     console.error(err);
-          //   }
-          // }
-          // addCartPrice();
 
+        {cart.map((item, i) => {
           return (
             <div key={i} className="single-item-cart">
               <p>{item.productId}</p>

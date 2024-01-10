@@ -4,7 +4,8 @@ import { Routes, Route } from "react-router-dom";
 import Login from "./components/Login.jsx";
 import Register from "./components/Register.jsx";
 import HomePage from "./components/HomePage.jsx";
-import AuthContextProvider from "./contexts/AuthContextProvider";
+import Account from "./components/Account.jsx";
+import AuthContextProvider from "./contexts/AuthContextProvider.jsx";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -18,6 +19,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/:productId" element="Specific Product" />
+          <Route path="/account" element={<Account />} />
         </Routes>
       </AuthContextProvider>
     </>
