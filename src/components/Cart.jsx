@@ -51,12 +51,12 @@ export default function Cart({ userId, storedCartId }) {
         productQuantity: item.quantity + adjustAmount,
       };
       const updateCart = await updateProductInCart(updateObj);
-      console.log(updateObj);
       console.log(updateCart);
     } catch (err) {
       console.error(err);
     }
   }
+
   // if (userId && token) {
   //   useEffect(() => {
   //     async function getData() {
@@ -89,12 +89,17 @@ export default function Cart({ userId, storedCartId }) {
               <p>{item.productId}</p>
               <p>{item.quantity}</p>
               <button
+                className="sub-quantity"
+                onClick={() => handleCartAdjust(item, -1)}
+              >
+                Remove 1
+              </button>
+              <button
                 className="add-quantity"
                 onClick={() => handleCartAdjust(item, 1)}
               >
                 Add 1
               </button>
-              <button className="sub-quantity">Remove 1</button>
             </div>
           );
         })}
