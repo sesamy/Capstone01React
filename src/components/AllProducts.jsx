@@ -32,6 +32,7 @@ export default function AllProducts() {
               price={priceFormatter(product.price)}
               description={product.description}
               image={product.image}
+              id={product.id}
             />
           </div>
         );
