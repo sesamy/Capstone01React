@@ -69,7 +69,7 @@ export const fetchCartByUser = async ({ userId }) => {
 };
 
 //create a new cart by adding a product
-export const addProductToCart = async (props) => {
+export const addProductToNewCart = async (props) => {
   try {
     const rsp = await fetch(`${Constants.API_URL}/carts`, {
       method: "POST",
