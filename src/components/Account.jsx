@@ -2,5 +2,13 @@ import useAuth from "../hooks/useAuth";
 
 export default function Account() {
   const { token } = useAuth();
-  return <div>{token}</div>;
+
+  async function eventHandler() {}
+
+  return (
+    <>
+      <div>Logged In!</div>
+      <button onClick={eventHandler}>Log me Out</button>
+    </>
+  );
 }
