@@ -2,6 +2,7 @@ import { useState } from "react";
 import { userLogin } from "../api/login";
 import { useNavigate, Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import NavBar from "../components/NavBar";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -25,6 +26,7 @@ export default function Login() {
 
   return (
     <>
+      <NavBar />
       <form onSubmit={handleSubmit}>
         <label>
           Username:

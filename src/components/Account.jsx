@@ -1,9 +1,16 @@
 import useAuth from "../hooks/useAuth";
 
 export default function Account() {
-  const { token } = useAuth();
+  const { setToken } = useAuth();
 
-  async function eventHandler() {}
+  function eventHandler() {
+    try {
+      setToken(null);
+      localStorage.removeItem("token");
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   return (
     <>
