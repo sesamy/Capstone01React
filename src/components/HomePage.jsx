@@ -6,7 +6,7 @@ export default function HomePage() {
   return (
     <>
       <NavBar />
-      {/* <SearchBar /> */}
+
       <Cart storedCartId="5" />
       <AllProducts />
     </>
