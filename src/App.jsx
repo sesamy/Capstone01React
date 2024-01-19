@@ -12,7 +12,6 @@ import ProductDetailsPage from "./components/ProductDetailsPage";
 function App() {
   const [user, setUser] = useState(null);
 
-  // useEffect(()=>{async function getUser})
   return (
     <>
       <AuthContextProvider>
