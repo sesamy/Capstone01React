@@ -4,6 +4,7 @@ import { fetchOneCategory, fetchAllProducts } from "../api/products.js";
 export default function SearchBar(props) {
   const [catParameter, setCatParameter] = useState("");
   const [nameParameter, setNameParameter] = useState("");
+  const [activeSearch, setActiveSearch] = useState("");
 
   async function handleSubmit(event) {
     try {
@@ -17,10 +18,15 @@ export default function SearchBar(props) {
         return nameCheck;
       });
       props.setActiveProducts(searchResult);
+      setActiveSearch(nameParameter);
     } catch (err) {
       console.error(err);
     }
   }
+
+  useEffect(() => {
+    setNameParameter("");
+  }, []);
   return (
     <>
       <p>Search Bar</p>
@@ -31,7 +37,9 @@ export default function SearchBar(props) {
           value={category}
           onChange={(event) => setCatParameter(event.target.value)}
         /> */}
-        <p>Search by Name</p>
+
+        {activeSearch ? <p>Searching for "{activeSearch}":</p> : <></>}
+
         <input
           type="text"
           value={nameParameter}
