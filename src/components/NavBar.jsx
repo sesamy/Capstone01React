@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 export default function NavBar({ token, setUser, setToken }) {
   return (
     <>
-      <Link to="./">Home</Link>
+      <Link to="/">Home</Link>
 
       <div>
         {token ? (
