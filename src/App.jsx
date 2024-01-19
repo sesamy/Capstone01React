@@ -10,13 +10,15 @@ import RequireAuth from "./components/RequireAuth/RequireAuth";
 import ProductDetailsPage from "./components/ProductDetailsPage";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [activeCartId, setActiveCartId] = useState(0);
 
   return (
     <>
       <AuthContextProvider>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<HomePage activeCartId={activeCartId} />} />
+          <Route path="/categories/:categoryName" />
+
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/products/:productId" element={<ProductDetailsPage />} />
