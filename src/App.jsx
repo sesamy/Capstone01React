@@ -7,22 +7,35 @@ import HomePage from "./pages/HomePage";
 import Account from "./components/Account";
 import AuthContextProvider from "./contexts/AuthContextProvider";
 import RequireAuth from "./components/RequireAuth/RequireAuth";
-import ProductDetailsPage from "./components/ProductDetailsPage";
+import ProductDetailsPage from "./pages/ProductDetailsPage";
+import ViewCategoryPage from "./pages/ViewCategoryPage";
+import CheckoutPage from "./pages/CheckoutPage";
 
 function App() {
-  const [user, setUser] = useState(null);
+  const [activeCartId, setActiveCartId] = useState(0);
 
   return (
     <>
       <AuthContextProvider>
         <Routes>
-          <Route path="/" element={<HomePage />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<HomePage activeCartId={activeCartId} />} />
+          <Route
+            path="/categories/:categoryName"
+            element={<ViewCategoryPage />}
+          />
+          <Route
+            path="/login"
+            element={<Login setActiveCartId={setActiveCartId} />}
+          />
           <Route path="/register" element={<Register />} />
           <Route path="/products/:productId" element={<ProductDetailsPage />} />
           <Route element={<RequireAuth />}>
             <Route path="/account" element={<Account />} />
           </Route>
+          <Route
+            path="/checkout"
+            element={<CheckoutPage activeCartId={activeCartId} />}
+          />
         </Routes>
       </AuthContextProvider>
     </>

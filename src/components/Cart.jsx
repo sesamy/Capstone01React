@@ -13,17 +13,32 @@ export default function Cart({ userId, storedCartId }) {
   const [cartTotal, setCartTotal] = useState(0);
   const { token } = useAuth();
 
-  useEffect(() => {
-    async function getData() {
-      try {
-        const data = await fetchSingleCart(storedCartId);
-        setCart(data.products);
-      } catch (err) {
-        console.error(err);
+  if (storedCartId) {
+    useEffect(() => {
+      async function getData() {
+        try {
+          const data = await fetchSingleCart(storedCartId);
+          setCart(data.products);
+        } catch (err) {
+          console.error(err);
+        }
       }
-    }
-    getData();
-  }, []);
+      getData();
+    }, []);
+  }
+  if (localStorage.cart) {
+    useEffect(() => {
+      function getData() {
+        try {
+          const data = localStorage.cart;
+          setCart(data);
+        } catch (err) {
+          console.error(err);
+        }
+      }
+      getData();
+    }, []);
+  }
 
   useEffect(() => {
     async function addCartPrice(item) {
@@ -57,55 +72,37 @@ export default function Cart({ userId, storedCartId }) {
     }
   }
 
-  // if (userId && token) {
-  //   useEffect(() => {
-  //     async function getData() {
-  //       try {
-  //         const data = await fetchCartByUser(userId);
-  //         setCart(data.products);
-  //       } catch (err) {
-  //         console.error(err);
-  //       }
-  //     }
-  //     getData();
-  //   }, []);
-  // }
-  // if (storedCartId) {
-  //   try {
-  //     setCart(storedCartId);
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // } else {
-  //   setCart([]);
-  // }
-
   return (
     <>
       <div className="cart">
-        {cart.map((item, i) => {
-          return (
-            <div key={i} className="single-item-cart">
-              <p>{item.productId}</p>
-              <p>{item.quantity}</p>
-              <button
-                className="sub-quantity"
-                onClick={() => handleCartAdjust(item, -1)}
-              >
-                Remove 1
-              </button>
-              <button
-                className="add-quantity"
-                onClick={() => handleCartAdjust(item, 1)}
-              >
-                Add 1
-              </button>
+        {cart && storedCartId ? (
+          cart.map((item, i) => {
+            return (
+              <div key={i} className="single-item-cart">
+                <p>{item.productId}</p>
+                <p>{item.quantity}</p>
+                <button
+                  className="sub-quantity"
+                  onClick={() => handleCartAdjust(item, -1)}
+                >
+                  Remove 1
+                </button>
+                <button
+                  className="add-quantity"
+                  onClick={() => handleCartAdjust(item, 1)}
+                >
+                  Add 1
+                </button>
+              </div>
+            );
+          })(
+            <div>
+              <p>{priceFormatter(cartTotal)}</p>
             </div>
-          );
-        })}
-      </div>
-      <div>
-        <p>{priceFormatter(cartTotal)}</p>
+          )
+        ) : (
+          <p>Cart Empty!</p>
+        )}
       </div>
     </>
   );
