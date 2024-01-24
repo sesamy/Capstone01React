@@ -48,7 +48,7 @@ export const fetchOneCategory = async (category) => {
       `${Constants.API_URL}/products/category/${category}`
     );
     const result = await rsp.json();
-    console.log(result);
+    return result;
   } catch (err) {
     console.error(err);
   }

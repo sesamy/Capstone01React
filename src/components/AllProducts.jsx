@@ -24,7 +24,7 @@ export default function AllProducts() {
 
   return (
     <>
-      <SearchBar setActiveProducts={setActiveProducts} />
+      <SearchBar setActiveProducts={setActiveProducts} catParameter={""} />
       <div className="all-products">
         {activeProducts.map((product) => {
           return (
