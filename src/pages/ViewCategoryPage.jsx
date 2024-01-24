@@ -7,7 +7,7 @@ import { priceFormatter } from "../utils/helpers.js";
 
 export default function ViewCategoryPage() {
   const { categoryName } = useParams();
-  const [activeCat, setActiveCat] = useState([]);
+  //   const [activeCat, setActiveCat] = useState([]);
   const [activeProducts, setActiveProducts] = useState([]);
 
   useEffect(() => {

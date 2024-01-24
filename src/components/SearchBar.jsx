@@ -6,7 +6,7 @@ export default function SearchBar(props) {
   const [nameParameter, setNameParameter] = useState("");
   const [activeSearch, setActiveSearch] = useState("");
 
-  async function handleSubmit(event) {
+  async function searchForParameter(event) {
     try {
       if (!catParameter) {
         event.preventDefault();
@@ -38,13 +38,17 @@ export default function SearchBar(props) {
     }
   }
 
+  async function searchSetCategory(event) {
+    //on submit, change category to selected category.
+  }
+
   useEffect(() => {
     setNameParameter("");
   }, []);
   return (
     <>
       <p>Search Bar</p>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={searchForParameter}>
         {/* <p>Search by Category</p>
         <input
           type="text"
