@@ -2,26 +2,44 @@ import { useEffect, useState } from "react";
 import { fetchOneCategory, fetchAllProducts } from "../api/products.js";
 
 export default function SearchBar(props) {
-  const [catParameter, setCatParameter] = useState("");
+  const [catParameter, setCatParameter] = useState(props.catParameter);
   const [nameParameter, setNameParameter] = useState("");
   const [activeSearch, setActiveSearch] = useState("");
 
-  async function handleSubmit(event) {
+  async function searchForParameter(event) {
     try {
-      event.preventDefault();
-      const data = await fetchAllProducts();
+      if (!catParameter) {
+        event.preventDefault();
+        const data = await fetchAllProducts();
 
-      const searchResult = data.filter((str) => {
-        const nameCheck = str.title
-          .toLowerCase()
-          .includes(nameParameter.toLowerCase());
-        return nameCheck;
-      });
-      props.setActiveProducts(searchResult);
-      setActiveSearch(nameParameter);
+        const searchResult = data.filter((str) => {
+          const nameCheck = str.title
+            .toLowerCase()
+            .includes(nameParameter.toLowerCase());
+          return nameCheck;
+        });
+        props.setActiveProducts(searchResult);
+        setActiveSearch(nameParameter);
+      } else {
+        event.preventDefault();
+        const data = await fetchOneCategory(catParameter);
+
+        const searchResult = data.filter((str) => {
+          const nameCheck = str.title
+            .toLowerCase()
+            .includes(nameParameter.toLowerCase());
+          return nameCheck;
+        });
+        props.setActiveProducts(searchResult);
+        setActiveSearch(nameParameter);
+      }
     } catch (err) {
       console.error(err);
     }
+  }
+
+  async function searchSetCategory(event) {
+    //on submit, change category to selected category.
   }
 
   useEffect(() => {
@@ -30,7 +48,7 @@ export default function SearchBar(props) {
   return (
     <>
       <p>Search Bar</p>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={searchForParameter}>
         {/* <p>Search by Category</p>
         <input
           type="text"
