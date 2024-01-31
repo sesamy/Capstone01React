@@ -3,6 +3,7 @@ import {
   fetchSingleCart,
   updateProductInCart,
 } from "../api/cart.js";
+import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { fetchSingleProduct } from "../api/products.js";
 import useAuth from "../hooks/useAuth";
@@ -13,32 +14,31 @@ export default function Cart({ userId, storedCartId }) {
   const [cartTotal, setCartTotal] = useState(0);
   const { token } = useAuth();
 
-  if (storedCartId) {
-    useEffect(() => {
-      async function getData() {
-        try {
-          const data = await fetchSingleCart(storedCartId);
-          setCart(data.products);
-        } catch (err) {
-          console.error(err);
-        }
+  useEffect(() => {
+    async function getData() {
+      try {
+        const data = await fetchSingleCart(storedCartId);
+        setCart(data.products);
+      } catch (err) {
+        console.error(err);
       }
-      getData();
-    }, []);
-  }
-  if (localStorage.cart) {
-    useEffect(() => {
-      function getData() {
-        try {
-          const data = localStorage.cart;
-          setCart(data);
-        } catch (err) {
-          console.error(err);
-        }
-      }
-      getData();
-    }, []);
-  }
+    }
+    getData();
+  }, []);
+
+  //  (localStorage.cart) {
+  //   useEffect(() => {
+  //     function getData() {
+  //       try {
+  //         const data = localStorage.cart;
+  //         setCart(data);
+  //       } catch (err) {
+  //         console.error(err);
+  //       }
+  //     }
+  //     getData();
+  //   }, []);
+  // }
 
   useEffect(() => {
     async function addCartPrice(item) {
@@ -69,6 +69,7 @@ export default function Cart({ userId, storedCartId }) {
       console.log(updateCart);
     } catch (err) {
       console.error(err);
+      z;
     }
   }
 
@@ -95,13 +96,15 @@ export default function Cart({ userId, storedCartId }) {
                 </button>
               </div>
             );
-          })(
-            <div>
-              <p>{priceFormatter(cartTotal)}</p>
-            </div>
-          )
+          })
         ) : (
           <p>Cart Empty!</p>
+        )}
+        {cart && (
+          <div>
+            <p>{priceFormatter(cartTotal)}</p>
+            <Link to="/checkout">Checkout</Link>
+          </div>
         )}
       </div>
     </>

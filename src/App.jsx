@@ -10,9 +10,10 @@ import RequireAuth from "./components/RequireAuth/RequireAuth";
 import ProductDetailsPage from "./pages/ProductDetailsPage";
 import ViewCategoryPage from "./pages/ViewCategoryPage";
 import CheckoutPage from "./pages/CheckoutPage";
+import SuccessCheckoutPage from "./pages/SuccessCheckoutPage";
 
 function App() {
-  const [activeCartId, setActiveCartId] = useState(0);
+  const [activeCartId, setActiveCartId] = useState(5);
 
   return (
     <>
@@ -33,9 +34,11 @@ function App() {
             <Route path="/account" element={<Account />} />
           </Route>
           <Route
-            path="/checkout"
-            element={<CheckoutPage activeCartId={activeCartId} />}
+            path="/checkout/*"
+            element={<CheckoutPage storedCartId={activeCartId} />}
           />
+          <Route path="/checkoutsuccess" element={<SuccessCheckoutPage />} />
+          <Route path="/*" element={<HomePage activeCartId={activeCartId} />} />
         </Routes>
       </AuthContextProvider>
     </>
