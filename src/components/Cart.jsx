@@ -8,6 +8,7 @@ import { useEffect, useState } from "react";
 import { fetchSingleProduct } from "../api/products.js";
 import useAuth from "../hooks/useAuth";
 import { priceFormatter } from "../utils/helpers.js";
+import "./Cart.css";
 
 export default function Cart({ userId, storedCartId }) {
   const [cart, setCart] = useState([]);
@@ -75,7 +76,7 @@ export default function Cart({ userId, storedCartId }) {
 
   return (
     <>
-      <div className="cart">
+      <div className="cart-container">
         {cart && storedCartId ? (
           cart.map((item, i) => {
             return (

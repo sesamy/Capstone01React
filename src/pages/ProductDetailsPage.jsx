@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { fetchSingleProduct } from "../api/products.js";
 import { priceFormatter } from "../utils/helpers.js";
 import { addProductToNewCart, updateProductInCart } from "../api/cart.js";
+import NavBar from "../components/NavBar.jsx";
 
 export default function ProductDetailsPage() {
   const { productId } = useParams();
@@ -57,6 +58,8 @@ export default function ProductDetailsPage() {
 
   return (
     <div>
+      <NavBar />
+
       <img src={product.image} className="product-details-image" />
       <p>{product.title}</p>
       <p>{priceFormatter(product.price)}</p>

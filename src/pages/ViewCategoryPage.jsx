@@ -4,6 +4,7 @@ import { fetchOneCategory } from "../api/products";
 import ProductCard from "../components/ProductCard";
 import SearchBar from "../components/SearchBar";
 import { priceFormatter } from "../utils/helpers.js";
+import NavBar from "../components/NavBar.jsx";
 
 export default function ViewCategoryPage() {
   const { categoryName } = useParams();
@@ -24,6 +25,7 @@ export default function ViewCategoryPage() {
 
   return (
     <>
+      <NavBar />
       <p>You are viewing the {categoryName} category!</p>
       <SearchBar
         setActiveProducts={setActiveProducts}
