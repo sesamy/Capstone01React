@@ -2,14 +2,17 @@ import { useState } from "react";
 import { userLogin } from "../api/login";
 import { useNavigate, Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
+import useUser from "../hooks/useUser";
 import NavBar from "../components/NavBar";
 
 export default function Login() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
+  const [badAttempt, setBadAttempt] = useState(false);
 
   const navigate = useNavigate();
   const { setToken } = useAuth();
+  const { setUserName } = useUser();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -18,9 +21,10 @@ export default function Login() {
       const data = await userLogin(userObj);
       setToken(data.token);
       localStorage.setItem("token", data.token);
+      setUserName(username);
       navigate("/account");
     } catch (err) {
-      console.error(err);
+      setBadAttempt(true);
     }
   }
 
@@ -28,6 +32,8 @@ export default function Login() {
     <>
       <NavBar />
       <form onSubmit={handleSubmit}>
+        {badAttempt ? <p>Incorrect Username or Password!</p> : <br></br>}
+
         <label>
           Username:
           <input

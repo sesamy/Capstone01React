@@ -10,7 +10,7 @@ export default function ProductDetailsPage() {
   const [product, setProduct] = useState([]);
   const [newAmount, setNewAmount] = useState([]);
   const storedCartId = null;
-  const tempUserId = 1;
+  const tempUserId = 999;
 
   useEffect(() => {
     async function getData() {

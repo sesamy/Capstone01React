@@ -1,17 +1,21 @@
 import useAuth from "../hooks/useAuth";
+import useUser from "../hooks/useUser";
 import { fetchSingleCart } from "../api/cart.js";
 import { useState, useEffect } from "react";
 import { priceFormatter } from "../utils/helpers.js";
 import { fetchSingleProduct } from "../api/products.js";
 import { useNavigate } from "react-router-dom";
+import { fetchAllUsers } from "../api/user.js";
 
-export default function CheckoutPage({ userId, storedCartId }) {
+export default function CheckoutPage({ storedCartId }) {
   const [cart, setCart] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
   const [city, setCity] = useState("");
   const [cardColor, setCardColor] = useState("");
   const { token } = useAuth();
+  const { userName } = useUser();
   const navigate = useNavigate();
+  const [validUser, setValidUser] = useState();
 
   useEffect(() => {
     async function getData() {
@@ -42,20 +46,36 @@ export default function CheckoutPage({ userId, storedCartId }) {
       .catch((err) => console.error(err));
   }, [cart]);
 
-  function handleCheckoutButton(event) {
-    event.preventDefault();
+  async function validateUser() {
     try {
-      navigate("/checkoutsuccess", {
-        state: {
-          successfulRequest: true,
-          storedCartId: storedCartId,
-          city: city,
-          total: cartTotal,
-          cardEntered: cardColor,
-        },
-      });
+      const checker = await fetchAllUsers();
+      console.log(userName);
+      const userIsValid = checker.find((x) => x.username == userName);
+
+      setValidUser(userIsValid);
     } catch (err) {
       console.error(err);
+    }
+  }
+
+  function handleCheckoutButton(event) {
+    event.preventDefault();
+    if (validateUser() === true) {
+      try {
+        navigate("/checkoutsuccess", {
+          state: {
+            successfulRequest: true,
+            storedCartId: storedCartId,
+            city: city,
+            total: cartTotal,
+            cardEntered: cardColor,
+          },
+        });
+      } catch (err) {
+        console.error(err);
+      }
+    } else {
+      console.log("error checking out");
     }
   }
 

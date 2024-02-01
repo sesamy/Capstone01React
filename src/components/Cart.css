@@ -1,5 +1,6 @@
 .cart-container {
-  position: fixed;
+  min-width: 200px;
+  top: 0;
   background-color: white;
   padding: 10px;
 }
