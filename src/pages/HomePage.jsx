@@ -3,7 +3,7 @@ import NavBar from "../components/NavBar.jsx";
 import Cart from "../components/Cart.jsx";
 import "./HomePage.css";
 
-export default function HomePage({ activeCartId }) {
+export default function HomePage({ activeCartId, setActiveCartId }) {
   return (
     <div>
       <NavBar />

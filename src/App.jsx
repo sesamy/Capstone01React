@@ -14,7 +14,7 @@ import CheckoutPage from "./pages/CheckoutPage";
 import SuccessCheckoutPage from "./pages/SuccessCheckoutPage";
 
 function App() {
-  const [activeCartId, setActiveCartId] = useState(5);
+  const [activeCartId, setActiveCartId] = useState(0);
 
   return (
     <>
@@ -36,10 +36,18 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route
               path="/products/:productId"
-              element={<ProductDetailsPage />}
+              element={<ProductDetailsPage storedCartId={activeCartId} />}
             />
             <Route element={<RequireAuth />}>
-              <Route path="/account" element={<Account />} />
+              <Route
+                path="/account"
+                element={
+                  <Account
+                    storedCartId={activeCartId}
+                    setActiveCartId={setActiveCartId}
+                  />
+                }
+              />
             </Route>
             <Route
               path="/checkout/*"

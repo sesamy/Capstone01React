@@ -5,11 +5,11 @@ import { priceFormatter } from "../utils/helpers.js";
 import { addProductToNewCart, updateProductInCart } from "../api/cart.js";
 import NavBar from "../components/NavBar.jsx";
 
-export default function ProductDetailsPage() {
+export default function ProductDetailsPage({ storedCartId }) {
   const { productId } = useParams();
   const [product, setProduct] = useState([]);
   const [newAmount, setNewAmount] = useState([]);
-  const storedCartId = null;
+
   const tempUserId = 999;
 
   useEffect(() => {

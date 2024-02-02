@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { userLogin } from "../api/login";
 import { useNavigate, Link } from "react-router-dom";
 import useAuth from "../hooks/useAuth";
@@ -29,30 +29,42 @@ export default function Login() {
     }
   }
 
+  useEffect(() => {
+    if (localStorage.token && localStorage.user) {
+      navigate("/account");
+    }
+  }, []);
+
   return (
     <>
       <NavBar />
-      <form onSubmit={handleSubmit}>
-        {badAttempt ? <p>Incorrect Username or Password!</p> : <br></br>}
+      {
+        <div>
+          <form onSubmit={handleSubmit}>
+            {badAttempt ? <p>Incorrect Username or Password!</p> : <br></br>}
 
-        <label>
-          Username:
-          <input
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
-          />
-        </label>
-        <label>
-          Password:
-          <input
-            type="password"
-            value={password}
-            onChange={(event) => setPassword(event.target.value)}
-          />
-        </label>
-        <button>Login</button>
-      </form>
-      <Link to="/register">Don't have an account? Click here to signup.</Link>
+            <label>
+              Username:
+              <input
+                value={username}
+                onChange={(event) => setUsername(event.target.value)}
+              />
+            </label>
+            <label>
+              Password:
+              <input
+                type="password"
+                value={password}
+                onChange={(event) => setPassword(event.target.value)}
+              />
+            </label>
+            <button>Login</button>
+          </form>
+          <Link to="/register">
+            Don't have an account? Click here to signup.
+          </Link>
+        </div>
+      }
     </>
   );
 }
