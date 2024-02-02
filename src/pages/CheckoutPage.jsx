@@ -16,6 +16,7 @@ export default function CheckoutPage({ storedCartId }) {
   const { userName } = useUser();
   const navigate = useNavigate();
   const [validUser, setValidUser] = useState();
+  const [badAttempt, setBadAttempt] = useState();
 
   useEffect(() => {
     async function getData() {
@@ -46,22 +47,23 @@ export default function CheckoutPage({ storedCartId }) {
       .catch((err) => console.error(err));
   }, [cart]);
 
-  async function validateUser() {
-    try {
-      const checker = await fetchAllUsers();
-      console.log(userName);
-      const userIsValid = checker.find((x) => x.username == userName);
+  // async function validateUser() {
+  //   try {
+  //     const checker = await fetchAllUsers();
+  //     console.log(userName);
+  //     const userIsValid = checker.find((x) => x.username == userName);
 
-      setValidUser(userIsValid);
-    } catch (err) {
-      console.error(err);
-    }
-  }
+  //     setValidUser(userIsValid);
+  //   } catch (err) {
+  //     console.error(err);
+  //   }
+  // }
 
   function handleCheckoutButton(event) {
     event.preventDefault();
-    if (validateUser() === true) {
-      try {
+    // if (validateUser() === true) {
+    try {
+      if (cardColor && city) {
         navigate("/checkoutsuccess", {
           state: {
             successfulRequest: true,
@@ -71,12 +73,15 @@ export default function CheckoutPage({ storedCartId }) {
             cardEntered: cardColor,
           },
         });
-      } catch (err) {
-        console.error(err);
+      } else {
+        setBadAttempt(true);
       }
-    } else {
-      console.log("error checking out");
+    } catch (err) {
+      console.error(err);
     }
+    // } else {
+    //   console.log("error checking out");
+    // }
   }
 
   return (
@@ -93,6 +98,7 @@ export default function CheckoutPage({ storedCartId }) {
           );
         })}
       </div>
+      {badAttempt ? <p> Please fill all fields!</p> : <br></br>}
       <form className="checkout-info" onSubmit={handleCheckoutButton}>
         <label>
           Shipping City

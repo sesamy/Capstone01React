@@ -5,8 +5,10 @@ import ProductCard from "../components/ProductCard";
 import SearchBar from "../components/SearchBar";
 import { priceFormatter } from "../utils/helpers.js";
 import NavBar from "../components/NavBar.jsx";
+import Cart from "../components/Cart.jsx";
+import "./HomePage.css";
 
-export default function ViewCategoryPage() {
+export default function ViewCategoryPage({ activeCartId }) {
   const { categoryName } = useParams();
   //   const [activeCat, setActiveCat] = useState([]);
   const [activeProducts, setActiveProducts] = useState([]);
@@ -25,6 +27,7 @@ export default function ViewCategoryPage() {
 
   return (
     <>
+      <Cart storedCartId={activeCartId} />
       <NavBar />
       <p>You are viewing the {categoryName} category!</p>
       <SearchBar

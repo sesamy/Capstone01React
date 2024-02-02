@@ -27,7 +27,7 @@ function App() {
             />
             <Route
               path="/categories/:categoryName"
-              element={<ViewCategoryPage />}
+              element={<ViewCategoryPage activeCartId={activeCartId} />}
             />
             <Route
               path="/login"

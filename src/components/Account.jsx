@@ -10,6 +10,7 @@ export default function Account() {
     try {
       setToken(null);
       localStorage.removeItem("token");
+      localStorage.removeItem("user");
     } catch (err) {
       console.error(err);
     }

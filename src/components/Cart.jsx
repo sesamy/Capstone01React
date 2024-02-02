@@ -11,7 +11,7 @@ import useUser from "../hooks/useUser";
 import { priceFormatter } from "../utils/helpers.js";
 import "./Cart.css";
 
-export default function Cart({ userId, storedCartId }) {
+export default function Cart({ storedCartId }) {
   const [cart, setCart] = useState([]);
   const [cartTotal, setCartTotal] = useState(0);
   const { token } = useAuth();
