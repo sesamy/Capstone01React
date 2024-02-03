@@ -24,15 +24,13 @@ export default function Account({ storedCartId, setActiveCartId }) {
     async function cartValidation() {
       try {
         const data = await fetchAllUsers();
-        const userIndex = data.findIndex(
-          (obj) => obj.username === localStorage.username
+        const user = data.find(
+          (obj) => obj.username === localStorage.getItem("user")
         );
-        const variable = userIndex + 2;
         const dataCarts = await fetchAllCarts();
         const resultCart = dataCarts.filter((obj) => {
-          obj.userId === variable;
+          return obj.userId === user.id;
         });
-
         setActiveCartId(resultCart[0].id);
       } catch (err) {
         console.error(err);

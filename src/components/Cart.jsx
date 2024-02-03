@@ -19,20 +19,17 @@ export default function Cart({ storedCartId }) {
 
   // find the first cart that has a userId that matches the userId of the userName
 
-  if (storedCartId) {
-    useEffect(() => {
-      async function getData() {
-        try {
-          const data = await fetchSingleCart(storedCartId);
-          setCart(data.products);
-        } catch (err) {
-          console.error(err);
-        }
+  useEffect(() => {
+    async function getData() {
+      try {
+        const data = await fetchSingleCart(storedCartId);
+        setCart(data.products);
+      } catch (err) {
+        console.error(err);
       }
-      getData();
-    }, []);
-  } else {
-  }
+    }
+    if (storedCartId) getData();
+  }, []);
 
   //  (localStorage.cart) {
   //   useEffect(() => {
@@ -86,7 +83,6 @@ export default function Cart({ storedCartId }) {
       console.log(updateCart);
     } catch (err) {
       console.error(err);
-      z;
     }
   }
 
