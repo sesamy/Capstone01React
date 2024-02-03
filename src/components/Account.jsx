@@ -37,7 +37,7 @@ export default function Account({ storedCartId, setActiveCartId }) {
       }
     }
     cartValidation();
-  }, []);
+  }, [storedCartId]);
 
   return (
     <>

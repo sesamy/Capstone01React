@@ -31,20 +31,6 @@ export default function Cart({ storedCartId }) {
     if (storedCartId) getData();
   }, []);
 
-  //  (localStorage.cart) {
-  //   useEffect(() => {
-  //     function getData() {
-  //       try {
-  //         const data = localStorage.cart;
-  //         setCart(data);
-  //       } catch (err) {
-  //         console.error(err);
-  //       }
-  //     }
-  //     getData();
-  //   }, []);
-  // }
-
   useEffect(() => {
     async function addCartPrice(item) {
       try {
@@ -62,14 +48,14 @@ export default function Cart({ storedCartId }) {
       .catch((err) => console.error(err));
   }, [cart]);
 
-  // async function getCartItemInfo(item) {
-  //   try {
-  //     const data = await fetchSingleProduct(item);
-  //     return data.title;
-  //   } catch (err) {
-  //     console.error(err);
-  //   }
-  // }
+  async function GetCartItemInfo(item) {
+    try {
+      const data = await fetchSingleProduct(item);
+      console.log(data.title);
+    } catch (err) {
+      console.error(err);
+    }
+  }
 
   async function handleCartAdjust(item, adjustAmount) {
     try {
@@ -87,40 +73,37 @@ export default function Cart({ storedCartId }) {
   }
 
   return (
-    <>
-      <div className="cart-container">
-        {cart && storedCartId ? (
-          cart.map((item, i) => {
-            return (
-              <div key={i} className="single-item-cart">
-                {/* <p>{() => getCartItemInfo(item.productId)}</p> */}
-                <p>{item.productId}</p>
-                <p>{item.quantity}</p>
-                <button
-                  className="sub-quantity"
-                  onClick={() => handleCartAdjust(item, -1)}
-                >
-                  Remove 1
-                </button>
-                <button
-                  className="add-quantity"
-                  onClick={() => handleCartAdjust(item, 1)}
-                >
-                  Add 1
-                </button>
-              </div>
-            );
-          })
-        ) : (
-          <p>Cart Empty!</p>
-        )}
-        {cart && (
-          <div>
-            <p>{priceFormatter(cartTotal)}</p>
-            <Link to="/checkout">Checkout</Link>
-          </div>
-        )}
-      </div>
-    </>
+    <div className="cart-container">
+      {cart && storedCartId ? (
+        cart.map((item, i) => {
+          return (
+            <div key={i} className="single-item-cart">
+              <p>{item.productId}</p>
+              <p>{item.quantity}</p>
+              <button
+                className="sub-quantity"
+                onClick={() => handleCartAdjust(item, -1)}
+              >
+                Remove 1
+              </button>
+              <button
+                className="add-quantity"
+                onClick={() => handleCartAdjust(item, 1)}
+              >
+                Add 1
+              </button>
+            </div>
+          );
+        })
+      ) : (
+        <p>Cart Empty!</p>
+      )}
+      {cart && (
+        <div>
+          <p>{priceFormatter(cartTotal)}</p>
+          <Link to="/checkout">Checkout</Link>
+        </div>
+      )}
+    </div>
   );
 }
