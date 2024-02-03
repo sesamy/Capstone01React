@@ -1,33 +1,41 @@
 import { Link } from "react-router-dom";
+import "./NavBar.css";
+import useAuth from "../hooks/useAuth";
 
-export default function NavBar({ token, setUser, setToken }) {
+export default function NavBar({ setUser, setToken }) {
+  const { token } = useAuth();
   return (
     <>
-      <Link to="/">Home</Link>
+      <div className="nav-container">
+        <div className="nav-item">
+          <Link to="/">Home</Link>
+        </div>
 
-      <div>
-        {token ? (
-          <div className="navbar-login">Hello, User!</div>
-        ) : (
-          <div className="navbar-login">
-            <Link to="/login">Login</Link>
-          </div>
-        )}
+        <div className="nav-item">
+          {token ? (
+            <div className="nav-item">
+              <Link
+                to="/login"
+                onClick={() => {
+                  setUser = null;
+                  localStorage.removeItem("token");
+                  setToken(null);
+                }}
+              >
+                Logout
+              </Link>
+            </div>
+          ) : (
+            <div className="nav-item">
+              <Link to="/login">Login</Link>
+            </div>
+          )}
+        </div>
+
+        <div className="nav-item">
+          <Link to="/account">Account</Link>
+        </div>
       </div>
-      {token && (
-        <Link
-          to="/login"
-          onClick={() => {
-            setUser = null;
-            localStorage.removeItem("token");
-            setToken(null);
-          }}
-        >
-          Logout
-        </Link>
-      )}
-
-      <Link to="./account">Account</Link>
     </>
   );
 }

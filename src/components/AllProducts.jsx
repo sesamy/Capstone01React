@@ -23,7 +23,7 @@ export default function AllProducts() {
   }, []);
 
   return (
-    <>
+    <div className="product-container">
       <SearchBar setActiveProducts={setActiveProducts} catParameter={""} />
       <div className="all-products">
         {activeProducts.map((product) => {
@@ -40,6 +40,6 @@ export default function AllProducts() {
           );
         })}
       </div>
-    </>
+    </div>
   );
 }

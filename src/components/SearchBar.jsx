@@ -40,6 +40,7 @@ export default function SearchBar(props) {
 
   async function searchSetCategory(event) {
     //on submit, change category to selected category.
+    event.preventDefault();
   }
 
   useEffect(() => {

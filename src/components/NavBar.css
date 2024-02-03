@@ -1,0 +1,14 @@
+.nav-item {
+  margin: auto;
+  align-content: center;
+  max-width: 30%;
+}
+
+.nav-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: center;
+  margin: auto;
+  z-index: 20;
+}

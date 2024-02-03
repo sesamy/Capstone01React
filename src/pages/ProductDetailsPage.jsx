@@ -3,13 +3,14 @@ import { useParams } from "react-router-dom";
 import { fetchSingleProduct } from "../api/products.js";
 import { priceFormatter } from "../utils/helpers.js";
 import { addProductToNewCart, updateProductInCart } from "../api/cart.js";
+import NavBar from "../components/NavBar.jsx";
 
-export default function ProductDetailsPage() {
+export default function ProductDetailsPage({ storedCartId }) {
   const { productId } = useParams();
   const [product, setProduct] = useState([]);
   const [newAmount, setNewAmount] = useState([]);
-  const storedCartId = null;
-  const tempUserId = 1;
+
+  const tempUserId = 999;
 
   useEffect(() => {
     async function getData() {
@@ -57,6 +58,8 @@ export default function ProductDetailsPage() {
 
   return (
     <div>
+      <NavBar />
+
       <img src={product.image} className="product-details-image" />
       <p>{product.title}</p>
       <p>{priceFormatter(product.price)}</p>
